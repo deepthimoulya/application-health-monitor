@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Application Health Monitor</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <h1>Application Health Monitor</h1>
+    <div class="right">
+      <span id="whoami"></span>
+      <button class="btn-secondary btn-small" id="refreshBtn">Refresh</button>
+      <button class="btn-secondary btn-small" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <form class="add-form card" id="addForm">
+      <input id="nameInput" placeholder="App name (e.g. Billing API)" required />
+      <input id="urlInput" placeholder="https://example.com/health" required />
+      <button class="btn-primary" type="submit" style="width:auto;margin-top:0;">Add app</button>
+    </form>
+
+    <div id="errorBanner" class="error-text"></div>
+
+    <div class="app-list" id="appList">
+      <div class="empty-state">Loading...</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

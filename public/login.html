@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Login - Application Health Monitor</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="center-screen">
+    <div class="card login-card">
+      <h1>Application Health Monitor</h1>
+      <p class="sub">Sign in to manage monitored apps</p>
+      <form id="loginForm">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button class="btn-primary" type="submit">Sign in</button>
+        <div class="error-text" id="errorText"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorText = document.getElementById('errorText');
+
+    // If already logged in, skip straight to dashboard.
+    fetch('/api/session').then(r => r.json()).then(s => {
+      if (s.loggedIn) window.location.href = '/index.html';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorText.textContent = '';
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          errorText.textContent = data.error || 'Login failed';
+          return;
+        }
+        window.location.href = '/index.html';
+      } catch (err) {
+        errorText.textContent = 'Could not reach server';
+      }
+    });
+  </script>
+</body>
+</html>
