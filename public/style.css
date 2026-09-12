@@ -1,8 +1,3 @@
-/* ============================================
-   Palette — earthy, bold, unisex riso-print feel:
-   warm stone base, teal / rust / mustard blocks,
-   near-black ink, thick outlines, offset shadows
-   ============================================ */
 :root {
   --bg: #eee7d8;
   --paper: #fbf8f0;
@@ -247,11 +242,7 @@ button:active { transform: translate(0, 0); box-shadow: none; }
 }
 .toast.error { background: var(--down); border-color: var(--border); color: #fff; box-shadow: 4px 4px 0 var(--ink); }
 
-/* ============================================
-   Stickers & decoration — a small original mascot
-   plus soft blob shapes and scattered confetti dots,
-   all pure CSS/SVG so no image assets are needed
-   ============================================ */
+
 
 body {
   position: relative;
@@ -272,7 +263,6 @@ body::before {
 }
 .topbar, .container { position: relative; z-index: 1; }
 
-/* Soft organic blob peeking out from behind the add-app card */
 .container > .card,
 .add-form {
   position: relative;
@@ -290,8 +280,6 @@ body::before {
   opacity: 0.7;
 }
 
-/* The mascot sticker — drop <div class="mascot"></div> in your HTML
-   (e.g. inside .topbar, or next to the empty-state message) */
 .mascot {
   width: 84px;
   height: 84px;
@@ -303,7 +291,6 @@ body::before {
 }
 .mascot.small { width: 44px; height: 44px; }
 
-/* Bigger mascot + friendlier copy for the empty state */
 .empty-state {
   display: flex;
   flex-direction: column;
