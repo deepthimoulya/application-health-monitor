@@ -1,9 +1,3 @@
-﻿// User account storage - separate JSON file from the monitored-apps data,
-// so app data and account data are independent concerns.
-//
-// Passwords are hashed with bcrypt before being written to disk - the file
-// never contains a plaintext password, only a bcrypt hash.
-
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
@@ -79,9 +73,7 @@ async function verifyPassword(user, password) {
   return bcrypt.compare(password, user.passwordHash);
 }
 
-// Seed a default admin account from env vars on first boot, so the app is
-// still usable out of the box with the credentials in .env.example, without
-// forcing every fresh install to sign up before they can even log in.
+
 async function ensureDefaultAdmin() {
   const username = process.env.AUTH_USERNAME || 'admin';
   const password = process.env.AUTH_PASSWORD || 'admin123';
