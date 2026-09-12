@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Login - Application Health Monitor</title>
+<title>Sign up - Application Health Monitor</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="center-screen">
     <div class="card login-card">
-      <h1>Application Health Monitor</h1>
-      <p class="sub">Sign in to manage monitored apps</p>
-      <form id="loginForm">
+      <h1>Create an account</h1>
+      <p class="sub">Set your own username and password</p>
+      <form id="signupForm">
         <label for="username">Username</label>
-        <input id="username" name="username" autocomplete="username" required />
+        <input id="username" name="username" autocomplete="username" minlength="3" maxlength="32" required />
         <label for="password">Password</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" required />
-        <button class="btn-primary" type="submit">Sign in</button>
+        <input id="password" name="password" type="password" autocomplete="new-password" minlength="6" required />
+        <button class="btn-primary" type="submit">Create account</button>
         <div class="error-text" id="errorText"></div>
       </form>
       <p class="sub" style="margin-top:16px;">
-        No account yet? <a href="/signup.html" style="color:var(--accent);">Create one</a>
+        Already have an account? <a href="/login.html" style="color:var(--accent);">Sign in</a>
       </p>
     </div>
   </div>
 
   <script>
-    const form = document.getElementById('loginForm');
+    const form = document.getElementById('signupForm');
     const errorText = document.getElementById('errorText');
 
     fetch('/api/session').then(r => r.json()).then(s => {
@@ -35,18 +35,18 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorText.textContent = '';
-      const username = document.getElementById('username').value;
+      const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
 
       try {
-        const res = await fetch('/api/login', {
+        const res = await fetch('/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password }),
         });
+        const data = await res.json().catch(() => ({}));
         if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          errorText.textContent = data.error || 'Login failed';
+          errorText.textContent = data.error || 'Could not create account';
           return;
         }
         window.location.href = '/index.html';

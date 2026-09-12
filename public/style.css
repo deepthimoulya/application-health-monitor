@@ -1,22 +1,42 @@
+/* ============================================
+   Palette — earthy, bold, unisex riso-print feel:
+   warm stone base, teal / rust / mustard blocks,
+   near-black ink, thick outlines, offset shadows
+   ============================================ */
 :root {
-  --bg: #0f1115;
-  --card: #171a21;
-  --border: #2a2e38;
-  --text: #e6e8eb;
-  --muted: #9aa1ac;
-  --accent: #4f8cff;
-  --up: #35c759;
-  --down: #ff5c5c;
-  --unknown: #9aa1ac;
+  --bg: #eee7d8;
+  --paper: #fbf8f0;
+  --ink: #16140f;
+  --muted: #726c5c;
+
+  --teal: #2f6f68;
+  --teal-soft: #cfe1de;
+  --rust: #d9622b;
+  --rust-soft: #f6dcc9;
+  --mustard: #e8ab3c;
+  --mustard-soft: #f7e6c3;
+
+  --card: var(--paper);
+  --border: var(--ink);
+
+  --up: #2f7a4f;
+  --up-bg: #d7ead9;
+  --down: #c8432b;
+  --down-bg: #f7ddd3;
+  --unknown: #8a8577;
+  --unknown-bg: #e7e2d4;
+
+  --radius: 18px;
+  --radius-sm: 10px;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   background: var(--bg);
-  color: var(--text);
+  color: var(--ink);
 }
 
 .center-screen {
@@ -24,117 +44,270 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
 }
 
 .card {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
   padding: 28px;
+  box-shadow: 7px 7px 0 var(--teal);
 }
 
 .login-card { width: 320px; }
 
-.login-card h1 { font-size: 20px; margin: 0 0 4px; }
+.login-card h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: -0.01em;
+}
 .login-card p.sub { color: var(--muted); margin: 0 0 20px; font-size: 13px; }
 
-label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 6px; }
+label { display: block; font-size: 12px; color: var(--muted); margin: 12px 0 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
 
 input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: #0d0f13;
-  color: var(--text);
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: #fff;
+  color: var(--ink);
   font-size: 14px;
+}
+input::placeholder { color: #9d9788; }
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mustard);
 }
 
 button {
   cursor: pointer;
-  border: none;
-  border-radius: 8px;
+  border: 2px solid var(--border);
+  border-radius: 999px;
   font-size: 14px;
-  font-weight: 600;
-  padding: 10px 16px;
+  font-weight: 700;
+  padding: 11px 18px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  background: var(--paper);
+  color: var(--ink);
 }
+button:hover { box-shadow: 3px 3px 0 var(--ink); transform: translate(-1px, -1px); }
+button:active { transform: translate(0, 0); box-shadow: none; }
 
-.btn-primary { background: var(--accent); color: white; width: 100%; margin-top: 18px; }
-.btn-primary:hover { opacity: 0.9; }
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  width: 100%;
+  margin-top: 18px;
+}
+.btn-primary:hover { box-shadow: 3px 3px 0 var(--rust); }
 
-.btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
-.btn-danger { background: transparent; border: 1px solid var(--down); color: var(--down); }
-.btn-small { padding: 6px 10px; font-size: 12px; }
+.btn-secondary { background: #fff; border: 2px solid var(--border); color: var(--ink); }
+.btn-danger { background: var(--down-bg); border: 2px solid var(--down); color: var(--down); }
+.btn-small { padding: 6px 12px; font-size: 12px; }
+.btn-small:hover { box-shadow: 2px 2px 0 var(--ink); }
 
-.error-text { color: var(--down); font-size: 13px; margin-top: 10px; min-height: 16px; }
+.error-text { color: var(--down); font-size: 13px; margin-top: 10px; min-height: 16px; font-weight: 600; }
 
-/* Dashboard */
+/* ============================================
+   Dashboard
+   ============================================ */
 .topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
+  padding: 20px 28px;
+  border-bottom: 2px solid var(--border);
+  background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size: 14px 14px;
+  background-position: -6px -6px;
+  background-color: var(--mustard);
 }
 
-.topbar h1 { font-size: 18px; margin: 0; }
-.topbar .right { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 13px; }
+.topbar h1 {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+  background: var(--paper);
+  display: inline-block;
+  padding: 4px 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.topbar .right { display: flex; align-items: center; gap: 12px; color: var(--ink); font-size: 13px; font-weight: 700; }
 
-.container { max-width: 900px; margin: 0 auto; padding: 24px; }
+.container { max-width: 900px; margin: 0 auto; padding: 28px 24px; }
 
 .add-form {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
   flex-wrap: wrap;
 }
 .add-form input { flex: 1; min-width: 180px; }
-.add-form button { flex-shrink: 0; }
+.add-form button { flex-shrink: 0; background: var(--teal); color: var(--paper); border-color: var(--ink); }
+.add-form button:hover { box-shadow: 3px 3px 0 var(--rust); }
 
-.app-list { display: flex; flex-direction: column; gap: 10px; }
+.app-list { display: flex; flex-direction: column; gap: 16px; }
 
+/* Color-block each row — teal / rust / mustard / paper, rotating for rhythm */
 .app-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 18px 20px;
   gap: 12px;
   flex-wrap: wrap;
+  background: var(--paper);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--ink);
 }
+.app-list .app-row:nth-child(4n+1) { background: var(--mustard-soft); }
+.app-list .app-row:nth-child(4n+2) { background: var(--teal); color: var(--paper); }
+.app-list .app-row:nth-child(4n+2) .app-url,
+.app-list .app-row:nth-child(4n+2) .app-meta { color: #d9ece9; }
+.app-list .app-row:nth-child(4n+3) { background: var(--paper); }
+.app-list .app-row:nth-child(4n+4) { background: var(--rust-soft); }
 
-.app-info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.app-info { display: flex; align-items: center; gap: 14px; min-width: 0; }
 
 .status-dot {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
+  border: 2px solid var(--border);
   flex-shrink: 0;
+  box-shadow: 0 0 0 3px var(--paper);
 }
-.status-dot.up { background: var(--up); box-shadow: 0 0 6px var(--up); }
-.status-dot.down { background: var(--down); box-shadow: 0 0 6px var(--down); }
+.status-dot.up { background: var(--up); }
+.status-dot.down { background: var(--down); }
 .status-dot.unknown { background: var(--unknown); }
 
-.app-name { font-weight: 600; }
+.app-name { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
 .app-url { color: var(--muted); font-size: 12px; word-break: break-all; }
 .app-meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
 
-.status-label { font-size: 12px; font-weight: 700; text-transform: uppercase; }
-.status-label.up { color: var(--up); }
-.status-label.down { color: var(--down); }
-.status-label.unknown { color: var(--unknown); }
+.status-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 2px solid var(--border);
+}
+.status-label.up { color: var(--up); background: var(--up-bg); }
+.status-label.down { color: var(--down); background: var(--down-bg); }
+.status-label.unknown { color: var(--ink); background: var(--unknown-bg); }
 
-.app-actions { display: flex; gap: 6px; }
+.app-actions { display: flex; gap: 8px; }
 
-.empty-state { color: var(--muted); text-align: center; padding: 40px 0; }
+.empty-state { color: var(--muted); text-align: center; padding: 40px 0; font-weight: 700; }
+
+.app-row {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.history-panel {
+  background: var(--paper);
+  border: 2px solid var(--border);
+  border-top: none;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  padding: 18px 20px;
+  margin-top: -16px;
+  margin-bottom: 6px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.history-title { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.history-canvas { width: 100%; max-width: 100%; height: 140px; display: block; }
+.history-log { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.history-log-row { font-size: 12px; color: var(--muted); }
 
 .toast {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 10px 16px;
-  border-radius: 8px;
+  bottom: 22px;
+  right: 22px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--border);
+  padding: 12px 18px;
+  border-radius: 999px;
   font-size: 13px;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 var(--rust);
 }
-.toast.error { border-color: var(--down); color: var(--down); }
+.toast.error { background: var(--down); border-color: var(--border); color: #fff; box-shadow: 4px 4px 0 var(--ink); }
+
+/* ============================================
+   Stickers & decoration — a small original mascot
+   plus soft blob shapes and scattered confetti dots,
+   all pure CSS/SVG so no image assets are needed
+   ============================================ */
+
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(var(--rust) 2.5px, transparent 2.5px),
+    radial-gradient(var(--teal) 2.5px, transparent 2.5px),
+    radial-gradient(var(--mustard) 2.5px, transparent 2.5px);
+  background-size: 160px 160px, 190px 190px, 130px 130px;
+  background-position: 10px 20px, 90px 140px, 60px 300px;
+  opacity: 0.18;
+  z-index: 0;
+}
+.topbar, .container { position: relative; z-index: 1; }
+
+/* Soft organic blob peeking out from behind the add-app card */
+.container > .card,
+.add-form {
+  position: relative;
+}
+.container > .card::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  right: 40px;
+  width: 110px;
+  height: 110px;
+  background: var(--mustard);
+  border-radius: 62% 38% 35% 65% / 55% 35% 65% 45%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* The mascot sticker — drop <div class="mascot"></div> in your HTML
+   (e.g. inside .topbar, or next to the empty-state message) */
+.mascot {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cellipse cx='60' cy='106' rx='28' ry='6' fill='%2316140f' opacity='0.1'/%3E%3Cpath d='M60 15c-28 0-42 20-42 46 0 24 16 42 42 42s42-18 42-42c0-26-14-46-42-46z' fill='%232f6f68' stroke='%2316140f' stroke-width='3'/%3E%3Ccircle cx='60' cy='12' r='6' fill='%23e8ab3c' stroke='%2316140f' stroke-width='3'/%3E%3Cline x1='60' y1='18' x2='60' y2='26' stroke='%2316140f' stroke-width='3'/%3E%3Ccircle cx='45' cy='62' r='5' fill='%2316140f'/%3E%3Ccircle cx='75' cy='62' r='5' fill='%2316140f'/%3E%3Cellipse cx='40' cy='75' rx='7' ry='4' fill='%23d9622b' opacity='0.55'/%3E%3Cellipse cx='80' cy='75' rx='7' ry='4' fill='%23d9622b' opacity='0.55'/%3E%3Cpath d='M48 80q12 10 24 0' stroke='%2316140f' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.mascot.small { width: 44px; height: 44px; }
+
+/* Bigger mascot + friendlier copy for the empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.empty-state .mascot { width: 110px; height: 110px; }
