@@ -1,7 +1,3 @@
-// Multi-user auth: each person registers their own username/password.
-// Passwords are hashed (see server/users.js) - never stored or compared
-// in plaintext. Session-based, via express-session.
-
 const users = require('./users');
 
 function requireAuth(req, res, next) {
